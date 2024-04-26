@@ -1,12 +1,9 @@
-import express from "express";
-import { Event, ROLES } from "schema";
+import { Event} from "schema";
 import { prisma } from "../../db/client";
-import { auth } from "../auth";
-import { requireRole } from "../auth/role";
+import { Request, Response } from "express";
 
 
-export const createEventRouter = express.Router();
-createEventRouter.post("/event", auth, requireRole(ROLES.ADMIN), async (req, res) => {
+export const createEventController = async (req:Request, res: Response) => {
 	try {
 		const { data, error } = Event.safeParse(req.body)
 
@@ -23,4 +20,4 @@ createEventRouter.post("/event", auth, requireRole(ROLES.ADMIN), async (req, res
 	} catch (error) {
 		res.status(500).json(error)
 	}
-});
+}

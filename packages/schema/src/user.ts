@@ -9,3 +9,8 @@ export enum ROLES {
   GUEST = "GUEST",
   ADMIN = "ADMIN"
 }
+
+export enum AUTH_TYPES {
+  LOGIN = "LOGIN",
+  REGISTER = "REGISTER"
+}
