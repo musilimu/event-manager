@@ -10,6 +10,7 @@ interface State {
 export enum TICKET_ACTIONS {
   ADD_TICKET = "ADD_TICKET",
   REMOVE_TICKET = "REMOVE_TICKET",
+  CLEAR_TICKETS = "CLEAR_TICKETS",
 }
 
 interface Action {
@@ -24,6 +25,8 @@ const reducer: React.Reducer<State, Action> = (state: State, action: Action) => 
   switch (action.type) {
     case TICKET_ACTIONS.ADD_TICKET:
       return {...state,tickets: [...state.tickets, action.payload] };
+    case TICKET_ACTIONS.CLEAR_TICKETS:
+      return {...state,tickets: [] };
     case TICKET_ACTIONS.REMOVE_TICKET:
       const selectedTickets = state.tickets.filter(ticket => ticket.id === action.payload.id)
       selectedTickets.pop()

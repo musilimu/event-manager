@@ -5,7 +5,7 @@ const initialTicketIds: number[] = []
 
 export async function bookEventTickets(tickets: Event[]) {
     const ticketIds = tickets.reduce((payload, ticket) => [...payload, ticket.id], initialTicketIds)
-    const request = await fetch(`${SERVER_URL}/book`, {
+    const request = await fetch(`${SERVER_URL}/booking`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json',

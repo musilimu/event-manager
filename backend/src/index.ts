@@ -4,6 +4,7 @@ import cors from 'cors'
 
 import { loginRouter, registerRouter } from "./controllers/auth";
 import { eventRouter } from "./controllers/event";
+import { bookingRouter } from "./controllers/booking";
 
 const app = express();
 app.use(express.json())
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
-app.use("/", eventRouter)
+app.use("/event", eventRouter)
+app.use("/booking", bookingRouter)
 
 app.listen(PORT, () => console.log(`server listening on port ${PORT}`));

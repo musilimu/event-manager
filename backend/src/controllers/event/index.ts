@@ -8,8 +8,8 @@ import { deleteEventController } from "./deleteEventController";
 
 export const eventRouter = express.Router();
 
-eventRouter.route('/event')
+eventRouter.route('/')
     .post(auth, requireRole(ROLES.ADMIN), createEventController)
     .get(getEventController)
-eventRouter.route('/event/:id')
+eventRouter.route('/:id')
     .delete(auth, requireRole(ROLES.ADMIN), deleteEventController)
