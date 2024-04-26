@@ -13,7 +13,7 @@ export const Header = () => {
 
     return (
         <header className="bg-slate-400 p-3 ">
-            <nav className="max-w-screen-xl mx-auto flex justify-between items-center"><a href="" className=" font-extrabold">Events</a>
+            <nav className="max-w-screen-xl mx-auto flex justify-between items-center"><Link to='/' className="font-extrabold">Events</Link>
                 <ul className="flex space-x-3 items-center">
                     <li className="hover:bg-white transition px-2 py-1 cursor-pointer"><Link to={'/bookings'}>Booked {data?.data?.data?.length} tickets</Link></li>
                     {state.tickets.length > 0 && <li className="transition cursor-pointer relative"><Button onClick={() => bookEventTickets(state.tickets).then(() => {

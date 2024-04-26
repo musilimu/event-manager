@@ -1,9 +1,9 @@
-import { useContext, useMemo } from "react"
+import { PropsWithChildren, useContext, useMemo } from "react"
 import { Event as TEvent } from "../hooks/getEvents"
 import { Button } from "./forms/Button"
 import { TICKET_ACTIONS, ticketContext } from "../context/tickets"
 
-export const Event = ({ event }: { event: TEvent }) => {
+export const Event = ({ event, showctions = true, children }: { event: TEvent, showctions: boolean } & PropsWithChildren) => {
     const { createdAt, id, isTicketAvailable, location, title } = event
     const context = useContext(ticketContext)
     if (context === null) return
@@ -16,7 +16,7 @@ export const Event = ({ event }: { event: TEvent }) => {
             <p>title: {title}</p>
             <p>location: {location}</p>
             <p>generated At: {new Date(createdAt).toLocaleString()}</p>
-            <div className="flex">
+            {showctions && <div className="flex">
                 {tickets.length > 0 && <Button onClick={() => {
                     dispatch({
                         type: TICKET_ACTIONS.REMOVE_TICKET,
@@ -36,8 +36,8 @@ export const Event = ({ event }: { event: TEvent }) => {
                         payload: event
                     })
                 }} disabled={!isTicketAvailable}>+</Button>}
-
-            </div>
+            </div>}
+            {children}  
         </div>
     )
 }

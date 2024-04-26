@@ -9,6 +9,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { TicketContext } from './context/tickets';
+import { Booking } from './components/Booking';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "register",
     element: <Layout><Register /></Layout>,
+  },
+  {
+    path: "bookings",
+    element: <Layout><Booking /></Layout>,
   },
   {
     path: "*",
