@@ -1,12 +1,14 @@
 import express from "express";
 import helmet from "helmet";
 
-import { router } from "./controllers/auth/register";
+import { loginRouter, registerRouter } from "./controllers/auth";
 
 const app = express();
+app.use(express.json())
 app.use(helmet());
 const PORT = process.env.PORT || 3000;
 
-app.use("/auth", router);
+app.use('/login', loginRouter)
+app.use('/register', registerRouter)
 
 app.listen(PORT, () => console.log(`server listening on port ${PORT}`));

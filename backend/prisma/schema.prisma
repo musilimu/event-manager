@@ -8,15 +8,14 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
   password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  role      Role     @relation(fields: [roleId], references: [id])
-  roleId    Int
-  tickets   Booking  @relation(fields: [bookingId], references: [id])
-  bookingId Int
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  role      Role      @relation(fields: [roleId], references: [id])
+  roleId    Int       @default(1)
+  Booking   Booking[]
 }
 
 model Role {
@@ -54,7 +53,8 @@ model Booking {
   canceled      Boolean
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-  User          User[]
+  User          User?    @relation(fields: [userId], references: [id])
   Event         Event?   @relation(fields: [eventId], references: [id])
   eventId       Int?
+  userId        Int?
 }
