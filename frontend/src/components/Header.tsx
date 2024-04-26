@@ -7,7 +7,7 @@ import { useBookings } from "../hooks/getBookings"
 
 export const Header = () => {
     const context = useContext(ticketContext)
-    const data = useBookings()
+    const { res: data } = useBookings()
     if (context === null) return
     const [state, dispatch] = context
 

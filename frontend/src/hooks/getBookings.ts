@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { SERVER_URL, Event as event } from "schema"
 import z from "zod"
 
@@ -25,10 +25,12 @@ async function getBookings() {
 
 export const useBookings = () => {
     const [res, setRes] = useState<any>()
-    useEffect(() => {
+    const refetch = useCallback(() => {
         getBookings().then(res => {
             setRes(res)
         })
     }, [])
-    return res
+    useEffect(refetch, [refetch])
+
+    return { res, refetch }
 }

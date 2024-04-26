@@ -7,7 +7,8 @@ export const getBookingEventController = async (req: any, res: Response) => {
 
         const data = await prisma.booking.findMany({
             where: {
-                userId: req.user.id
+                userId: req.user.id,
+                canceled: false
             },
             include: {
                 event: true

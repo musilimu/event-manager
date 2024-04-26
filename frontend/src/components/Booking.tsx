@@ -4,15 +4,14 @@ import { Event } from "./Event";
 import { Button } from "./forms/Button";
 
 export const Booking = () => {
-    const data = useBookings()
-    console.log(data?.data?.data);
-
+    const {res, refetch} = useBookings()
 
     return (
         <div className="flex gap-4 flex-wrap my-8">{
-            data?.data?.data?.map(ticket => (<Event showctions={false} key={ticket.id} event={ticket.event}>
+            res?.data?.data?.map(ticket => (<Event showctions={false} key={ticket.id} event={ticket.event}>
                 <Button onClick={() =>{
                     deleteTicket(ticket.id)
+                    refetch()
                 }}>cancel</Button>
             </Event>))
         }</div>
