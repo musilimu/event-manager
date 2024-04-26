@@ -5,11 +5,13 @@
   "main": "dist/index.js",
   "scripts": {
     "watch": "tsc -w",
-    "dev":"nodemon dist/index.js"
+    "dev": "nodemon dist/index.js"
   },
   "dependencies": {
+    "@prisma/client": "5.13.0",
     "express": "^4.19.2",
     "nodemon": "^3.1.0",
+    "prisma": "^5.13.0",
     "validation": "workspace:*"
   },
   "devDependencies": {
