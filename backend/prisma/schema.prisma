@@ -40,10 +40,11 @@ model Event {
   id                Int       @id @default(autoincrement())
   title             String
   location          String
-  isTicketAvailable Boolean
+  isTicketAvailable Boolean   @default(true)
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
-  tickets           Booking[]
+  // tickets           Booking[]
+  Booking           Booking[]
 }
 
 model Booking {
@@ -54,7 +55,8 @@ model Booking {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   User          User?    @relation(fields: [userId], references: [id])
-  Event         Event?   @relation(fields: [eventId], references: [id])
+  // Event         Event?   @relation(fields: [eventId], references: [id])
+  event         Event?   @relation(fields: [eventId], references: [id])
   eventId       Int?
   userId        Int?
 }
