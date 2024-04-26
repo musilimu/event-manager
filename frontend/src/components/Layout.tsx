@@ -4,6 +4,8 @@ import { Header } from "./Header"
 export const Layout = (props: PropsWithChildren) => {
     return (<>
         <Header />
-        {props.children}
+        <main className="max-w-screen-xl mx-auto">
+            {props.children}
+        </main>
     </>)
 }

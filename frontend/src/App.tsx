@@ -1,4 +1,5 @@
 import './App.css'
+import { EventList } from './components/EventList';
 import { Layout } from './components/Layout';
 import { Login } from './components/forms/Login';
 import { Register } from './components/forms/Register'
@@ -14,8 +15,7 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       <Layout>
-        <h1>Hello World</h1>
-        <Link to="/login">Login</Link>
+        <EventList />
       </Layout>
     ),
   },
