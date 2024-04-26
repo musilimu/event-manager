@@ -29,7 +29,7 @@ export const Event = ({ event }: { event: TEvent }) => {
                         type: TICKET_ACTIONS.ADD_TICKET,
                         payload: event
                     })
-                }} disabled={!isTicketAvailable}>book now {tickets.length}</Button>
+                }} disabled={!isTicketAvailable}>{tickets.length > 0 ? `Selected ${tickets.length}` : 'book now'}</Button>
                 {tickets.length > 0 && <Button onClick={() => {
                     dispatch({
                         type: TICKET_ACTIONS.ADD_TICKET,

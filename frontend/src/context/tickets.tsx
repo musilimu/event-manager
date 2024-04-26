@@ -25,7 +25,10 @@ const reducer: React.Reducer<State, Action> = (state: State, action: Action) => 
     case TICKET_ACTIONS.ADD_TICKET:
       return {...state,tickets: [...state.tickets, action.payload] };
     case TICKET_ACTIONS.REMOVE_TICKET:
-      return {...state,tickets: state.tickets.filter(ticket => ticket.id !== action.payload.id) };
+      const selectedTickets = state.tickets.filter(ticket => ticket.id === action.payload.id)
+      selectedTickets.pop()
+      const unSelectedTickets = state.tickets.filter(ticket => ticket.id !== action.payload.id)
+      return {...state,tickets:[...selectedTickets, ...unSelectedTickets] };
     default:
       return state;
   }
