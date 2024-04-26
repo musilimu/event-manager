@@ -2,12 +2,13 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { sayHi } from "validation"
+import { User } from 'schema'
 
 function App() {
   const [count, setCount] = useState(0)
-  console.log(sayHi("muslim"));
-
+  const { data, error } = User.safeParse({email: "ddf@sgsg.dd", password: "nvvvvvvvvvvvvvvvvvvvvvvvvvv"})
+  if(error) return JSON.stringify(error)
+  return JSON.stringify(data)
   return (
     <>
       <div>

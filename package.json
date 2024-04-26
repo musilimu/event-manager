@@ -5,12 +5,17 @@
   "main": "index.js",
   "scripts": {
     "start": "pnpm --stream -r start",
-    "dev": "pnpm --stream -r run dev"
+    "dev": "pnpm  --parallel --stream -r run dev"
   },
   "dependencies": {
-    "validation": "workspace:*"
+    "schema": "workspace:*",
+    "zod": "^3.23.4"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "typescript": "^5.2.2"
+  }
 }
