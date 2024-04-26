@@ -10,7 +10,7 @@ export const EventList = () => {
       <h2 className="text-4xl text-slate-500 text-center my-8">EventList</h2>
       <div className="flex gap-4 flex-wrap my-8">
         {res?.data?.map(event => (
-          <Event event={event} />
+          <Event key={event.id} event={event} />
         ))}
 
       </div>

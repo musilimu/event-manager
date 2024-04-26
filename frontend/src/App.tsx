@@ -5,10 +5,10 @@ import { Login } from './components/forms/Login';
 import { Register } from './components/forms/Register'
 import {
   createBrowserRouter,
-  RouterProvider,
-  // Route,
   Link,
+  RouterProvider,
 } from "react-router-dom";
+import { TicketContext } from './context/tickets';
 
 const router = createBrowserRouter([
   {
@@ -41,7 +41,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider router={router} />
+      <TicketContext>
+        <RouterProvider router={router} />
+      </TicketContext>
     </>
   )
 }
