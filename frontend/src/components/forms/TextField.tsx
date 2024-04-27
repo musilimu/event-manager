@@ -1,6 +1,6 @@
-import { forwardRef } from "react"
+import { InputHTMLAttributes, forwardRef } from "react"
 
-export const TextField = forwardRef((props: { label: string, type?: string, placeholder: string, error?: string }, ref) => {
+export const TextField = forwardRef((props: { label: string, type?: string, placeholder: string, error?: string } & InputHTMLAttributes<any>, ref) => {
     const { label, type, placeholder, error, ...rest } = props
 
     return (

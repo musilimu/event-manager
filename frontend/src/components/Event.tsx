@@ -20,7 +20,7 @@ export const Event = ({ event, showctions = true, children }: { event: TEvent, s
             <p>location: {location}</p>
             <p>generated At: {new Date(createdAt).toLocaleString()}</p>
             {showctions && <>
-                <EventControls id={id} />
+                <EventControls event={event} />
                 <CheckAuth role={[ROLES.GUEST]}>
                     <div className="flex">
                         {tickets.length > 0 && <Button onClick={() => {

@@ -1,12 +1,17 @@
 import { SERVER_URL } from "schema"
 import { useToken } from "../hooks/getToken"
-export const createEvent = async(data: any) => {
+import { Event } from "../hooks/getEvents"
+
+export enum TMutateEvent { UPDATE_EVENT = 'PUT', CREATE_EVENT = 'POST' }
+
+export const mutateEvent = async ({ data, type, event }: { data: any, event?: Event, type: TMutateEvent }) => {
     const token = useToken()
     if (token == null)
         throw new Error("unauthorized")
 
-    const request = await fetch(`${SERVER_URL}/event`, {
-        method: 'POST',
+
+    const request = await fetch(`${SERVER_URL}/event/${event?.id ? event?.id : ''}`, {
+        method: type,
         headers: {
             'content-type': 'application/json',
             'authorization': `Bearer ${token}`

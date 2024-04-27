@@ -1,11 +1,12 @@
+import { TMutateEvent } from "../../actions/createEvent"
 import { EventList } from "../EventList"
-import { EventForm } from "./EventForm"
+import { EventForm } from "../forms/EventForm"
 
 export const Dashboard = () => {
 
   return (
     <>
-      <EventForm />
+      <EventForm type={TMutateEvent.CREATE_EVENT} />
       <EventList />
     </>
   )

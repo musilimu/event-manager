@@ -10,7 +10,7 @@ export const EventList = () => {
   return (
     <>
       <h2 className="text-4xl text-slate-500 text-center my-8">EventList</h2>
-      <div className="flex gap-4 flex-wrap my-8">
+      <div className="flex gap-4 flex-wrap my-8 items-start">
         {data?.data?.map(event => (
           <Event showctions key={event.id} event={event} />
         ))}
