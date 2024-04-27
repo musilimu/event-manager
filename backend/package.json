@@ -6,8 +6,10 @@
   "scripts": {
     "build": "tsc --incremental",
     "start": "node dist/index.js",
-    "dev": "nodemon",
-    "seed": "ts-node prisma/seed/index.ts"
+    "dev": "npm run seed && nodemon",
+    "db":"docker-compose up -d",
+    "migrate":"npm run db && npx prisma migrate dev",
+    "seed": "npm run migrate && ts-node prisma/seed/index.ts"
   },
   "dependencies": {
     "@prisma/client": "5.13.0",
