@@ -8,8 +8,14 @@ export const Dashboard = () => {
   return (
     <>
       <EventForm type={TMutateEvent.CREATE_EVENT} />
-      <EventList />
-      <Booking />
+      <div className="gap-4 grid">
+      <div className="bg-slate-200 p-4">
+        <EventList />
+      </div>
+      <div>
+        <Booking />
+      </div>
+      </div>
     </>
   )
 }

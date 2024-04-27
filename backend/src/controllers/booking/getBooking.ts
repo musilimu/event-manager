@@ -7,7 +7,6 @@ export const getBookingEventController = async (req: any, res: Response) => {
         userId: req.user.id,
         canceled: false
     }
-
     try {
 
         const data = await prisma.booking.findMany({
