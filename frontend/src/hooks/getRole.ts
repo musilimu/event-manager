@@ -22,5 +22,5 @@ export async function getRole() {
         return { data: response }
     }
 
-    throw new Error("unauthorized")
+    localStorage.clear()
 }

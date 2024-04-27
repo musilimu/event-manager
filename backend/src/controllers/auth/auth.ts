@@ -3,8 +3,8 @@ import jwt from "jsonwebtoken";
 import { prisma } from "../../db/client";
 
 interface ExtendedRequest extends Request {
-    user?: unknown; 
-  }
+    user?: unknown;
+}
 export async function auth(req: ExtendedRequest, res: Response, next: NextFunction) {
     const authorizationHeader = req.headers.authorization;
 
@@ -15,7 +15,8 @@ export async function auth(req: ExtendedRequest, res: Response, next: NextFuncti
     const token = authorizationHeader.split(' ')[1];
     try {
         const decoded = jwt.verify(token, process.env.SECRET!)
-        
+
+
         const user = await prisma.user.findFirst({
             where: {
                 email: decoded as string
@@ -28,6 +29,10 @@ export async function auth(req: ExtendedRequest, res: Response, next: NextFuncti
                 }
             }
         })
+        if (!user) {
+            res.status(401).json({ message: 'user not found' });
+            return
+        }
         req.user = user
 
         next();

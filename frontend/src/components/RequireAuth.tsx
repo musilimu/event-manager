@@ -13,7 +13,6 @@ export const RequireAuth = ({ children, role }: { role: ROLES[] } & PropsWithChi
     })
 
 
-
     const navigate = useNavigate()
     useEffect(() => {
         if (error || !token) return navigate('/login')
