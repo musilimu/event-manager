@@ -1,18 +1,19 @@
-import { useEvents } from "../hooks/getEvents"
+import { useQuery } from "react-query";
+import { getEvents } from "../hooks/getEvents";
 import { Event } from "./Event";
 
 export const EventList = () => {
-  const res = useEvents()
+  const { data, error, isLoading } = useQuery('events', getEvents)
+  if (error) return <>{error}</>
+  if (isLoading) return <>Loading...</>
 
-  if (res?.error) return <>{res.error}</>
   return (
     <>
       <h2 className="text-4xl text-slate-500 text-center my-8">EventList</h2>
       <div className="flex gap-4 flex-wrap my-8">
-        {res?.data?.map(event => (
-          <Event key={event.id} event={event} />
+        {data?.data?.map(event => (
+          <Event showctions key={event.id} event={event} />
         ))}
-
       </div>
     </>
   )
