@@ -4,6 +4,8 @@ import { Event } from "./Event";
 import { Button } from "./forms/Button";
 import { getBookings } from "../hooks/getBookings";
 import { queryClient } from "../main";
+import { CheckAuth } from "./RequireAuth";
+import { ROLES } from "schema";
 
 export const Booking = () => {
     const { data, error, isLoading } = useQuery({
@@ -21,12 +23,18 @@ export const Booking = () => {
     if (isLoading) return <>Loading...</>
 
     return (
-        <div className="flex gap-4 flex-wrap my-8">{
-            data?.data?.data?.map(ticket => (<Event showctions={false} key={ticket.id} event={ticket.event}>
-                <Button onClick={() => {
-                    mutation.mutateAsync(ticket.id)
-                }}>cancel</Button>
-            </Event>))
-        }</div>
+        <>
+            <h2 className="text-center text-3xl text-slate-600">All Bookings</h2>
+            <div className="flex gap-4 flex-wrap my-8">{
+                data?.data?.data?.map(ticket => (<Event showctions={false} key={ticket.id} event={ticket.event}>
+                    <CheckAuth role={[ROLES.ADMIN]}>
+                        <p>Booked by: {ticket.user.email}</p>
+                    </CheckAuth>
+                    <Button onClick={() => {
+                        mutation.mutateAsync(ticket.id)
+                    }}>cancel</Button>
+                </Event>))
+            }</div>
+        </>
     )
 }
