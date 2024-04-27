@@ -54,7 +54,7 @@ export const Header = () => {
                                 })
                             })
                         }}>confirm booking {state.tickets.length} tickets</Button></li>}
-                        <li className="hover:bg-white transition px-2 py-1 cursor-pointer"><Link to={'/dashboard'}>Dashboard</Link></li>
+                        <CheckAuth role={[ROLES.ADMIN]}><li className="hover:bg-white transition px-2 py-1 cursor-pointer"><Link to={'/dashboard'}>Dashboard</Link></li></CheckAuth>
                         <li className="hover:bg-white transition px-2 py-1 cursor-pointer" onClick={() => {
                             logout.mutateAsync()
                         }}>Logout</li>

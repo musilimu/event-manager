@@ -7,7 +7,7 @@ export const TextField = forwardRef((props: { label: string, type?: string, plac
         <div className="grid">
             <label htmlFor={label}>{label}</label>
             <input {...rest} type={type || "text"} ref={ref} placeholder={placeholder} className="p-2 border-slate-200 outline-slate-200 border-solid border-2" />
-            <p>{error}</p>
+            <p className="text-orange-600">{error}</p>
         </div>
     )
 })

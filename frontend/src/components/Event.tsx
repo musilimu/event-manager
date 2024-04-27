@@ -2,6 +2,8 @@ import { PropsWithChildren, useContext, useMemo } from "react"
 import { Event as TEvent } from "../hooks/getEvents"
 import { Button } from "./forms/Button"
 import { TICKET_ACTIONS, ticketContext } from "../context/tickets"
+import { CheckAuth } from "./RequireAuth"
+import { ROLES } from "schema"
 
 export const Event = ({ event, showctions = true, children }: { event: TEvent, showctions: boolean } & PropsWithChildren) => {
     const { createdAt, id, isTicketAvailable, location, title } = event
@@ -16,28 +18,37 @@ export const Event = ({ event, showctions = true, children }: { event: TEvent, s
             <p>title: {title}</p>
             <p>location: {location}</p>
             <p>generated At: {new Date(createdAt).toLocaleString()}</p>
-            {showctions && <div className="flex">
-                {tickets.length > 0 && <Button onClick={() => {
-                    dispatch({
-                        type: TICKET_ACTIONS.REMOVE_TICKET,
-                        payload: event
-                    })
-                }} disabled={!isTicketAvailable}>-</Button>}
+            {showctions && <>
+                <CheckAuth role={[ROLES.ADMIN]}>
+                    <Button>Delete Event</Button>
+                    <Button>Edit Event</Button>
+                </CheckAuth>
+                <CheckAuth role={[ROLES.GUEST]}>
+                    <div className="flex">
+                        {tickets.length > 0 && <Button onClick={() => {
+                            dispatch({
+                                type: TICKET_ACTIONS.REMOVE_TICKET,
+                                payload: event
+                            })
+                        }} disabled={!isTicketAvailable}>-</Button>}
 
-                <Button className="flex-1" onClick={() => {
-                    dispatch({
-                        type: TICKET_ACTIONS.ADD_TICKET,
-                        payload: event
-                    })
-                }} disabled={!isTicketAvailable}>{tickets.length > 0 ? `Selected ${tickets.length}` : 'book now'}</Button>
-                {tickets.length > 0 && <Button onClick={() => {
-                    dispatch({
-                        type: TICKET_ACTIONS.ADD_TICKET,
-                        payload: event
-                    })
-                }} disabled={!isTicketAvailable}>+</Button>}
-            </div>}
-            {children}  
+                        <Button className="flex-1" onClick={() => {
+                            dispatch({
+                                type: TICKET_ACTIONS.ADD_TICKET,
+                                payload: event
+                            })
+                        }} disabled={!isTicketAvailable}>{tickets.length > 0 ? `Selected ${tickets.length}` : 'book now'}</Button>
+                        {tickets.length > 0 && <Button onClick={() => {
+                            dispatch({
+                                type: TICKET_ACTIONS.ADD_TICKET,
+                                payload: event
+                            })
+                        }} disabled={!isTicketAvailable}>+</Button>}
+                    </div>
+                </CheckAuth>
+            </>
+            }
+            {children}
         </div>
     )
 }

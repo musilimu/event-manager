@@ -1,6 +1,14 @@
+import { EventList } from "../EventList"
+import { EventForm } from "./EventForm"
+
 export const Dashboard = () => {
 
   return (
-      <div>index</div>
+    <>
+      <EventForm />
+      <EventList />
+    </>
   )
 }
+
+
