@@ -15,13 +15,13 @@ export const RequireAuth = ({ children, role }: { role: ROLES[] } & PropsWithChi
 
     const navigate = useNavigate()
     useEffect(() => {
-        if (error || !token) return navigate('/login')
+        if (error || !token || !data) return navigate('/login')
 
         if (!role.includes(data?.data.name)) {
             return navigate('/')
         }
         if (error?.message === 'unauthorized') return navigate('/login')
-    }, [data?.data.name, error])
+    }, [data?.data?.name, error, data])
 
     if (isLoading) return undefined
 
@@ -41,9 +41,9 @@ export const CheckAuth = ({ children, role }: { role: ROLES[] } & PropsWithChild
     const token = useToken()
 
     useEffect(() => {
-        if (error || !token) return navigate('/login')
+        if (error || !token || !data) return navigate('/login')
 
-    }, [error])
+    }, [error, data])
     if (isLoading) return undefined
     if (!role.includes(data?.data.name)) {
         return undefined

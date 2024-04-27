@@ -10,7 +10,7 @@ export type Event = (z.infer<typeof event> & {
 export async function getRole() {
     const token = useToken()
     if (token == null)
-        throw new Error("unauthorized")
+        return
     const request = await fetch(`${SERVER_URL}/role`, {
         headers: {
             'content-type': 'application/json',
@@ -23,4 +23,5 @@ export async function getRole() {
     }
 
     localStorage.clear()
+    return
 }
