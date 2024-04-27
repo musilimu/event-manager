@@ -10,13 +10,19 @@ import {
 } from "react-router-dom";
 import { TicketContext } from './context/tickets';
 import { Booking } from './components/Booking';
+import { Dashboard } from './components/Dashboard';
+import { CheckAuth, RequireAuth } from './components/RequireAuth';
+import { ROLES } from 'schema';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <Layout>
-        <EventList />
+        <CheckAuth role={[ROLES.ADMIN, ROLES.GUEST]}>
+          <EventList />
+        </CheckAuth>
+
       </Layout>
     ),
   },
@@ -30,7 +36,22 @@ const router = createBrowserRouter([
   },
   {
     path: "bookings",
-    element: <Layout><Booking /></Layout>,
+    element: <Layout>
+      <CheckAuth role={[ROLES.ADMIN, ROLES.GUEST]}>
+        <Booking />
+      </CheckAuth>
+    </Layout>,
+  },
+  {
+    path: "dashboard",
+    element: <Layout>
+      <RequireAuth role={[ROLES.ADMIN]}>
+
+        <CheckAuth role={[ROLES.ADMIN]}>
+          <Dashboard />
+        </CheckAuth>
+      </RequireAuth>
+    </Layout>,
   },
   {
     path: "*",

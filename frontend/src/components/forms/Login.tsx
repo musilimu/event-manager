@@ -1,24 +1,37 @@
 import { AUTH_TYPES } from 'schema'
 import { authenticate } from '../../actions/authenticate'
 import { AuthForm } from './AuthForm'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useMutation } from 'react-query'
+import { useToken } from '../../hooks/getToken'
+import { queryClient } from '../../main'
 
 export const Login = () => {
   const [responseMessage, setResponseMessage] = useState("")
   const navigate = useNavigate()
+  const mutation = useMutation(authenticate, {
+    onSuccess: () => {
+      navigate('/')
+      queryClient.invalidateQueries('tickets')
+    },
+    onError: (error: any) => {
+      setResponseMessage(error.message || error.name)
+    }
+  })
+  const token = useToken()
+  useEffect(()=>{
+    if (token)
+      navigate('/')
+  },[])
+
 
   return (
     <>
       <AuthForm actionText='Login' title='Login now' formSubmit={(data) => {
-        authenticate(data, AUTH_TYPES.LOGIN).then(res =>{
-          setResponseMessage(res?.message)
-          if(res.token){
-            localStorage.setItem("jwt", res.token)
-            navigate('/')
-          }
-        }).catch(error => {
-          setResponseMessage(error.message || error.name)
+        mutation.mutateAsync({
+          data,
+          type: AUTH_TYPES.LOGIN
         })
       }} link={{ link: "/register", text: "Don't have an account? Signup!" }} />
       <p className='text-center'>{responseMessage}</p>
