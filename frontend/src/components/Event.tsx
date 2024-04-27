@@ -4,6 +4,7 @@ import { Button } from "./forms/Button"
 import { TICKET_ACTIONS, ticketContext } from "../context/tickets"
 import { CheckAuth } from "./RequireAuth"
 import { ROLES } from "schema"
+import { EventControls } from "./EventControls"
 
 export const Event = ({ event, showctions = true, children }: { event: TEvent, showctions: boolean } & PropsWithChildren) => {
     const { createdAt, id, isTicketAvailable, location, title } = event
@@ -19,10 +20,7 @@ export const Event = ({ event, showctions = true, children }: { event: TEvent, s
             <p>location: {location}</p>
             <p>generated At: {new Date(createdAt).toLocaleString()}</p>
             {showctions && <>
-                <CheckAuth role={[ROLES.ADMIN]}>
-                    <Button>Delete Event</Button>
-                    <Button>Edit Event</Button>
-                </CheckAuth>
+                <EventControls id={id} />
                 <CheckAuth role={[ROLES.GUEST]}>
                     <div className="flex">
                         {tickets.length > 0 && <Button onClick={() => {
