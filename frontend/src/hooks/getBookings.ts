@@ -1,28 +1,26 @@
-import { SERVER_URL, Event as event } from "schema"
-import z from "zod"
+import { SERVER_URL, type Event as event } from "schema";
+import type z from "zod";
 import { useToken } from "./getToken";
 
-export type Event = (z.infer<typeof event> & {
-    id: number;
-    isTicketAvailable: boolean
-    createdAt: string
-})
+export type Event = z.infer<typeof event> & {
+	id: number;
+	isTicketAvailable: boolean;
+	createdAt: string;
+};
 export async function getBookings() {
-    try {
-        const token = useToken()
-        if (token == null)
-            throw new Error("unauthorized")
+	try {
+		const token = useToken();
+		if (token == null) throw new Error("unauthorized");
 
-        const request = await fetch(`${SERVER_URL}/booking`, {
-            headers: {
-                'content-type': 'application/json',
-                'authorization': `Bearer ${token}`
-            },
-        })
-        const response = await request.json()
-        return { data: response }
-    } catch (error) {
-        return { error }
-    }
-
+		const request = await fetch(`${SERVER_URL}/booking`, {
+			headers: {
+				"content-type": "application/json",
+				authorization: `Bearer ${token}`,
+			},
+		});
+		const response = await request.json();
+		return { data: response };
+	} catch (error) {
+		return { error };
+	}
 }

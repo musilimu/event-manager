@@ -1,1 +1,1 @@
-export const QUERY_KEYS = ['tickets', 'events']
+export const QUERY_KEYS = ["tickets", "events"];
