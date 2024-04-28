@@ -47,3 +47,12 @@ Please submit your final project via [this Google Form](https://forms.gle/aSh16d
 
 
 Happy coding!
+
+## How to get started
+- install docker and docker-compose
+- node should be installed with pnpm
+- run dev command
+```sh
+pnpm install
+npm run dev
+```
